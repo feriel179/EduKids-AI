@@ -6,7 +6,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Spring Boot -->
+    <!-- ==================== SPRING BOOT ==================== -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -14,7 +14,7 @@
         <relativePath/>
     </parent>
 
-    <!-- Project information -->
+    <!-- ==================== PROJECT INFORMATION ==================== -->
     <groupId>tn.esprit</groupId>
     <artifactId>NERMINEPROJET</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -22,12 +22,28 @@
     <name>NERMINEPROJET</name>
     <description>NERMINEPROJET</description>
 
-    <!-- Java version -->
+    <!-- ==================== PROPERTIES ==================== -->
     <properties>
         <java.version>17</java.version>
+        <spring-cloud.version>2025.1.5</spring-cloud.version>
     </properties>
 
-    <!-- Dependencies -->
+    <!-- ==================== SPRING CLOUD BOM ==================== -->
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- ==================== DEPENDENCIES ==================== -->
     <dependencies>
 
         <!-- Spring Data JPA -->
@@ -36,7 +52,7 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- Spring Web -->
+        <!-- Spring Web MVC -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webmvc</artifactId>
@@ -48,10 +64,18 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- Swagger / OpenAPI -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>3.2.0</version>
+        </dependency>
+
+        <!-- Eureka Client -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
         <!-- Lombok -->
@@ -61,14 +85,14 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Tests JPA -->
+        <!-- JPA Tests -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa-test</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!-- Tests Web -->
+        <!-- Web MVC Tests -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webmvc-test</artifactId>
@@ -77,9 +101,8 @@
 
     </dependencies>
 
-    <!-- Build -->
+    <!-- ==================== BUILD ==================== -->
     <build>
-
         <plugins>
 
             <!-- Spring Boot Maven Plugin -->
@@ -88,7 +111,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- Maven Compiler -->
+            <!-- Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -99,55 +122,44 @@
                     <execution>
                         <id>default-compile</id>
                         <phase>compile</phase>
-
                         <goals>
                             <goal>compile</goal>
                         </goals>
 
                         <configuration>
-
                             <annotationProcessorPaths>
-
-                                <!-- Lombok -->
                                 <path>
                                     <groupId>org.projectlombok</groupId>
                                     <artifactId>lombok</artifactId>
                                 </path>
-
                             </annotationProcessorPaths>
-
                         </configuration>
+
                     </execution>
 
                     <!-- Test Compile -->
                     <execution>
                         <id>default-testCompile</id>
                         <phase>test-compile</phase>
-
                         <goals>
                             <goal>testCompile</goal>
                         </goals>
 
                         <configuration>
-
                             <annotationProcessorPaths>
-
-                                <!-- Lombok -->
                                 <path>
                                     <groupId>org.projectlombok</groupId>
                                     <artifactId>lombok</artifactId>
                                 </path>
-
                             </annotationProcessorPaths>
-
                         </configuration>
+
                     </execution>
 
                 </executions>
             </plugin>
 
         </plugins>
-
     </build>
 
 </project>
