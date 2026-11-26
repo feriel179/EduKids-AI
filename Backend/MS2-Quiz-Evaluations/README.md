@@ -8,6 +8,23 @@
 Un quiz de démo **publié** est créé au premier lancement : *Français — Grammaire (4ème primaire)*
 (4 questions, 5 pts chacune). Désactivable avec `app.seed.enabled=false`.
 
+## Eureka (Service Discovery)
+MS2 s'enregistre dans le serveur Eureka de l'équipe (`Backend/Eureka`, port 8761) sous le nom **MS2-QUIZ**.
+1. Lancer d'abord `Backend/Eureka` (EurekaApplication).
+2. Lancer MS2 → il apparaît sur http://localhost:8761 dans « Instances currently registered with Eureka ».
+3. Deuxième instance : IntelliJ → Run → Edit Configurations → Copy Configuration → VM options `-Dserver.port=8092`.
+
+## Actuator (supervision)
+| URL | Contenu |
+|---|---|
+| http://localhost:8082/actuator | Liste des endpoints exposés |
+| http://localhost:8082/actuator/health | État : UP/DOWN, base MySQL, espace disque, Eureka |
+| http://localhost:8082/actuator/info | Nom, version, responsable, version Java |
+| http://localhost:8082/actuator/metrics | Métriques (ex. `/actuator/metrics/http.server.requests`) |
+| http://localhost:8082/actuator/mappings | Tous les endpoints REST |
+
+Eureka utilise `/actuator/health` (`eureka.client.healthcheck.enabled=true`) : si MySQL tombe, MS2 passe DOWN dans le dashboard.
+
 ## Architecture
 ```
 entities/      Quiz, Question, Choix, Tentative, ReponseEleve (+ enums StatutQuiz, TypeQuestion)
