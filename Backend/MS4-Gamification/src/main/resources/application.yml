@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: ms4-gamification
+
+  datasource:
+    url: jdbc:sqlserver://RAMY:1433;databaseName=GamificationDB;encrypt=true;trustServerCertificate=true
+    username: gamification_user
+    password: "ChangeMe_2026!"
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    # Ne pas modifier les tables existantes
+    # Pas de création automatique du schéma
+    # Pas de suppression de tables
+    # Gestion manuelle du schéma
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+
+server:
+  port: 8084
