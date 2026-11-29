@@ -5,6 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Spring Boot -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -12,6 +13,7 @@
         <relativePath/>
     </parent>
 
+    <!-- Informations du microservice -->
     <groupId>com.example</groupId>
     <artifactId>MS1-Cours-Ressources</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -19,9 +21,27 @@
     <name>MS1-Cours-Ressources</name>
     <description>Microservice Cours et Ressources - EduKids AI</description>
 
+    <!-- Configuration Java et Spring Cloud -->
     <properties>
         <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.release>21</maven.compiler.release>
+        <spring-cloud.version>2025.1.5</spring-cloud.version>
     </properties>
+
+    <!-- Gestion des versions Spring Cloud -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
 
@@ -57,6 +77,18 @@
             <version>3.2.0</version>
         </dependency>
 
+        <!-- Eureka Discovery Client -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Actuator : Observabilite -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
         <!-- Tests JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -82,10 +114,22 @@
 
     <build>
         <plugins>
+
+            <!-- Compilation Java 21 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <release>21</release>
+                </configuration>
+            </plugin>
+
+            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
         </plugins>
     </build>
 
